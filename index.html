@@ -182,6 +182,15 @@
     overflow-x: auto;
   }
 
+  .site-footer {
+    text-align: center;
+    padding: 20px 0 10px;
+    color: #cbd5e1;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
   @media (max-width: 600px) {
     body { padding: 10px; }
     header h1 { font-size: 1.3em; }
@@ -239,9 +248,7 @@
     <div style="font-size:0.85em; color:#94a3b8; margin-top:8px;">Structured questions (80 marks) require manual assessment — use "Show All Solutions" to compare.</div>
   </div>
 
-  <footer style="text-align:center; padding:30px 0; color:#64748b; font-size:0.85em;">
-    Based on CON26W0 past papers (2023–2025) • CCNA ITN &amp; SRWE aligned
-  </footer>
+  <footer class="site-footer">Modau.IT</footer>
 </div>
 
 <script>
@@ -438,7 +445,7 @@ const structuredQuestions = [
           <tr><td>Broadcast domain</td><td>Does <em>not</em> break broadcast domains (unless VLANs)</td><td>Breaks broadcast domains — each interface is its own</td></tr>
           <tr><td>Collision domain</td><td>Each port = separate collision domain</td><td>Each interface = separate collision domain</td></tr>
           <tr><td>Connects</td><td>Devices within the <em>same</em> LAN</td><td><em>Different</em> networks (LAN↔WAN)</td></tr>
-          <tr><td>Efficiency</td><td>Hardware-based (ASIC) forwarding — very fast; full-duplex; reduces collisions</td><td>Controls broadcast traffic; path selection; ACL/security; NAT; prevents broadcast storms from crossing networks</td></tr>
+          <tr><td>Efficiency</td><td>Hardware-based (ASIC) forwarding — very fast; full-duplex; reduces collisions</td><td>Controls broadcast traffic; path selection; ACL/security; NAT; prevents broad[...]
         </table>
         <p><strong>In short:</strong> Switches make <em>intra-network</em> communication fast and efficient; routers make <em>inter-network</em> communication possible and controlled.</p>`
       },
@@ -459,7 +466,7 @@ const structuredQuestions = [
         text: '3.3 Explain why the OSI model is essential for troubleshooting.',
         marks: 2,
         solution: `<h4>Model Answer</h4>
-        <p>The OSI model provides a <strong>common language</strong> and divides networking into <strong>layers</strong>. This lets engineers <em>isolate</em> a fault to a specific layer (bottom-up or top-down), making troubleshooting systematic. Because it is vendor-neutral, the same approach works on any equipment.</p>`
+        <p>The OSI model provides a <strong>common language</strong> and divides networking into <strong>layers</strong>. This lets engineers <em>isolate</em> a fault to a specific layer (bottom-up or top-down) and compare expected versus actual behaviors quickly.</p>`
       },
       {
         id: 'q3_4',
@@ -515,7 +522,7 @@ const structuredQuestions = [
         solution: `<h4>Model Answer</h4>
         <table>
           <tr><th>Problem</th><th>Solution / Prevention</th></tr>
-          <tr><td><strong>EMI/RFI interference</strong> (from motors, fluorescent lights, power cables)</td><td>Use shielded twisted-pair (STP), proper grounding, route data cables away from power cables, or use fibre in high-interference areas.</td></tr>
+          <tr><td><strong>EMI/RFI interference</strong> (from motors, fluorescent lights, power cables)</td><td>Use shielded twisted-pair (STP), proper grounding, route data cables away from power cables.</td></tr>
           <tr><td><strong>Crosstalk</strong> (signal bleeding between pairs)</td><td>Use Cat5e/Cat6 with correct twist rates, terminate properly, untwist no more than 13 mm, use factory-made patch cords.</td></tr>
           <tr><td><em>Alternative:</em> <strong>Attenuation</strong> (signal loss over distance)</td><td>Keep runs under 100 m, use repeaters/switches, use higher-category cable.</td></tr>
           <tr><td><em>Alternative:</em> <strong>Damaged connectors / poor termination</strong></td><td>Test with cable certifier, re-terminate, use quality connectors.</td></tr>
@@ -695,7 +702,7 @@ const structuredQuestions = [
         marks: 3,
         solution: `<h4>Model Answer</h4>
         <p><strong>Method: Router-on-a-stick (single-arm router).</strong></p>
-        <p><strong>Justification:</strong> Only one physical router interface (R1 G0/0/1) connects to S1. Configuring subinterfaces on G0/0/1 — one for VLAN 10 and one for VLAN 20 — lets the router act as the default gateway for both VLANs. This is the most cost-effective solution for a small network with few VLANs and limited hardware.</p>`
+        <p><strong>Justification:</strong> Only one physical router interface (R1 G0/0/1) connects to S1. Configuring subinterfaces on G0/0/1 — one for VLAN 10 and one for VLAN 20 — lets the router route between VLANs over one trunk link.</p>`
       },
       {
         id: 'q6_6',
@@ -704,7 +711,7 @@ const structuredQuestions = [
         solution: `<h4>Model Answer</h4>
         <ul>
           <li><strong>Advantage:</strong> Cost-effective — only one physical router interface is needed to route between many VLANs; simple to configure for small networks.</li>
-          <li><strong>Disadvantage:</strong> Not scalable — all inter-VLAN traffic must traverse the single physical link into the router, creating a bottleneck; the router CPU processes every packet (no hardware switching).</li>
+          <li><strong>Disadvantage:</strong> Not scalable — all inter-VLAN traffic must traverse the single physical link into the router, creating a bottleneck; the router CPU processes every packet.</li>
         </ul>`
       }
     ]
@@ -715,10 +722,10 @@ const structuredQuestions = [
     parts: [
       {
         id: 'q7_1',
-        text: '7.1 A user reports that emails initially viewed on their smartphone are inaccessible on their laptop. (a) Explain the likely cause based on the email protocols involved. (b) Devise a plan to resolve the problem.',
+        text: '7.1 A user reports that emails initially viewed on their smartphone are inaccessible on their laptop. (a) Explain the likely cause based on the email protocols involved. (b) Devise a plan to resolve the issue.',
         marks: 3,
         solution: `<h4>Model Answer</h4>
-        <p><strong>(a) Likely cause:</strong> The smartphone is configured with <strong>POP3</strong>. By default POP3 <em>downloads</em> mail to the device and <em>removes it from the server</em>. So the laptop cannot see those messages — they no longer exist on the mail server.</p>
+        <p><strong>(a) Likely cause:</strong> The smartphone is configured with <strong>POP3</strong>. By default POP3 <em>downloads</em> mail to the device and <em>removes it from the server</em>. So when the laptop checks the same account, the messages might not be present.</p>
         <p><strong>(b) Plan:</strong></p>
         <ul>
           <li>Reconfigure <em>both</em> devices to use <strong>IMAP</strong> (or IMAP over SSL, port 993), which keeps mail synchronised on the server so all devices see the same mailbox.</li>
@@ -751,7 +758,7 @@ const structuredQuestions = [
         solution: `<h4>Model Answer</h4>
         <table>
           <tr><th></th><th>TCP</th><th>UDP</th></tr>
-          <tr><td><strong>(a) Reliability &amp; setup</strong></td><td>Connection-oriented (3-way handshake); reliable — ACKs, retransmissions, sequencing, flow control</td><td>Connectionless; best-effort — no ACK, no retransmission, no ordering</td></tr>
+          <tr><td><strong>(a) Reliability &amp; setup</strong></td><td>Connection-oriented (3-way handshake); reliable — ACKs, retransmissions, sequencing, flow control</td><td>Connectionless; best-effort without guaranteed delivery</td></tr>
           <tr><td><strong>(b) Use cases</strong></td><td>HTTP/HTTPS, FTP, SMTP/POP3/IMAP, SSH, Telnet</td><td>DNS, DHCP, VoIP, video streaming, online gaming, TFTP, SNMP</td></tr>
           <tr><td><strong>(c) Overhead &amp; performance</strong></td><td>20–60 byte header; more overhead; slower but reliable</td><td>8-byte header; minimal overhead; faster, lower latency</td></tr>
         </table>`
